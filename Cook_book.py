@@ -1,9 +1,10 @@
 # f = open('recipes.txt', encoding='utf-8')
 # data = f.read()
 # f.close()
+from typing import List
 
 cook_book = {}
-list_name_temp = []
+list_name_temp: List[str] = []
 dish_name = []
 count = 0
 nn = 0
@@ -24,34 +25,37 @@ with open('recipes.txt', encoding='utf-8') as f:
             nn += 1
             print("Блюдо №", nn)
             dish_name = str_name
-            print("Имя блюда:", dish_name)
+            #print("Имя блюда:", dish_name)
 
         elif count == 2:  # Формируем значеия словаря
             recip_len = int(str_name)
         #
-        elif count >= 3 and count < recip_len + 3:
-
+        elif count >= 3 and count <= recip_len + 2:
             ingr = str_name.strip().split("|")
             for i in ingr:
                 i.strip()
                 # print(i)
                 list_name_temp.append(i)
+                #print("Имя блюда:", dish_name)
+                #
+                #print(cook_book.keys(), "\n")
+            #print("Имя блюда:", dish_name)
 
         # Вычисляем пробелы в рецепте
         elif len(line.strip()) == 0:
             count = 0
-            print("Имя блюда:", dish_name)
             cook_book[dish_name] = list_name_temp
-            # print(cook_book)
-            # print(list_name_temp, type(list_name_temp))
-            # print()
-            #list_name_temp.clear()
-            print(cook_book)
+            print("Имя блюда:", dish_name)
+            print(cook_book.items())
+
+        else:
+            pass
+
 
     #print(list_name_temp)
 
 print('----------------')
-print(cook_book, type(cook_book))
+print(cook_book)
 print('Размер рецепта:', count, "строк")
 
 # cook_book = {}
