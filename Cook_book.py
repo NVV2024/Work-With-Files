@@ -11,7 +11,6 @@ nn = 0
 with open('recipes.txt', encoding='utf-8') as f:
     for line in f:
         count += 1
-
         # Считаем длинну строки "l="
         l = len(line.strip())
         str_name = line.strip()
