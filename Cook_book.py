@@ -51,9 +51,3 @@ with open('recipes.txt', encoding='utf-8') as f:
 
 #print('----------------')
 print(f'cook book = {cook_book}')
-#print('Размер рецепта:', count, "строк")
-
-# cook_book = {}
-# list_name_temp = ['Яйцо ', ' 2 ', ' шт', 'Молоко ', ' 100 ', ' мл', 'Помидор ', ' 2 ', ' шт']
-# cook_book["Омлет"] = list_name_temp
-# print(cook_book)
