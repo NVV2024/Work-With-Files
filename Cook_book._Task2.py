@@ -9,6 +9,46 @@ count = 0
 count_ingr = 0
 
 dishes = []
+list_new_key = []
+list_new_ingr = []
+dic_temp_inradients_ = {}
+dic_temp_amount_ingradients_ = {}
+dic_summ_ingradients = {}
+
+def get_shop_list_by_dishes(dishes, person_count):
+
+    for dish in dishes:
+        for dic_ingradients in cook_book[dish]:
+            #print(dic_ingradients)
+            #Новый словарь для инградиентов и их кол-ва в блюде
+            #
+            #Создаём еденицы измерений
+            dic_temp_amount_ingradients_['measure'] = dic_ingradients['measure']
+            #
+            #Умножаем кол-во инградиентов на кол-во персон
+            dic_temp_amount_ingradients_['quantity'] = int(dic_ingradients['quantity'])*person_count
+
+            #Создаём словарь инградиентов
+            # Новый ключ для кол-ва инградиентов
+            new_key = dic_ingradients.get('ingredient_name')
+            list_new_key.append(new_key)
+            dic_temp_inradients_[new_key] = dic_temp_amount_ingradients_
+            list_new_ingr.append(list(dic_temp_inradients_.items()))
+
+            print(dic_temp_inradients_)
+
+            #Создаём общий словарь инградиентов
+            #
+            #тут пока что то не получается :(
+            #Извинете, не получается пока свести в один словарь все данные, не успеваю (
+            list_values = list(dic_temp_inradients_.values())
+            dic_summ_ingradients[new_key] = list_values
+
+
+            #Очищаем временные словари
+            dic_temp_amount_ingradients_.clear()
+            dic_temp_inradients_.clear()
+    return
 
 with open('recipes.txt', encoding='utf-8') as f:
     for line in f:
@@ -54,50 +94,6 @@ with open('recipes.txt', encoding='utf-8') as f:
 print('----------------')
 print(f'cook book = {cook_book.keys()}')
 print('--------------', '\n')
-# print(cook_book['Омлет'][0])
-
-def get_shop_list_by_dishes(dishes, person_count):
-    count_1 = 0
-    dic_temp_inradients_ = {}
-    dic_temp_amount_ingradients_ = {}
-    dic_summ_ingradients = {}
-    for dish in dishes:
-        #print(cook_book[i])
-        #list_ingr = cook_book[dish]
-        #print(dish, '- Стало')
-        for dic_ingradients in cook_book[dish]:
-            #print(dic_ingradients)
-            #Новый словарь для инградиентов и их кол-ва в блюде
-            #
-            #Создаём еденицы измерений
-            dic_temp_amount_ingradients_['measure'] = dic_ingradients['measure']
-            #
-            #Умножаем кол-во инградиентов на кол-во персон
-            dic_temp_amount_ingradients_['quantity'] = int(dic_ingradients['quantity'])*person_count
-
-            #Создаём словарь инградиентов
-            # Новый ключ для кол-ва инградиентов
-            new_key = dic_ingradients.get('ingredient_name')
-            #print(new_key)
-            dic_temp_inradients_[new_key] = dic_temp_amount_ingradients_
-
-            print(f'{dic_temp_inradients_}')
-            #print(f'{dic_ingradients}', '\n')
-
-            #Создаём общий словарь инградиентов
-            #
-            #тут пока что то не получается :(
-            #list_keys = list(dic_temp_inradients_.keys())
-            list_values = list(dic_temp_inradients_.values())
-            print(f'Список {new_key}')
-            print(f'Список {list_values}')
-            dic_summ_ingradients[new_key] = list_values
-            #print(f'Общий список инградиентов: {dic_summ_ingradients}')
-
-            #Очищаем временные словари
-            dic_temp_amount_ingradients_.clear()
-            dic_temp_inradients_.clear()
-    #print(f'Общий список инградиентов: {dic_summ_ingradients}')
-    return
 
 get_shop_list_by_dishes(['Запеченный картофель', 'Омлет'], 2)
+
